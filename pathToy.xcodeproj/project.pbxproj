@@ -14,6 +14,8 @@
 		3198075419FAD59200149DB5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3198075319FAD59200149DB5 /* Images.xcassets */; };
 		3198075719FAD59200149DB5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3198075519FAD59200149DB5 /* LaunchScreen.xib */; };
 		3198076319FAD59200149DB5 /* pathToyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3198076219FAD59200149DB5 /* pathToyTests.m */; };
+		3198077119FAE25D00149DB5 /* UIBezierPath+Rob_warp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3198077019FAE25D00149DB5 /* UIBezierPath+Rob_warp.m */; };
+		3198077419FAE31300149DB5 /* UIBezierPath+Rob_forEach.m in Sources */ = {isa = PBXBuildFile; fileRef = 3198077319FAE31300149DB5 /* UIBezierPath+Rob_forEach.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		3198075C19FAD59200149DB5 /* pathToyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pathToyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3198076119FAD59200149DB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3198076219FAD59200149DB5 /* pathToyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pathToyTests.m; sourceTree = "<group>"; };
+		3198076F19FAE25D00149DB5 /* UIBezierPath+Rob_warp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Rob_warp.h"; sourceTree = "<group>"; };
+		3198077019FAE25D00149DB5 /* UIBezierPath+Rob_warp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Rob_warp.m"; sourceTree = "<group>"; };
+		3198077219FAE31300149DB5 /* UIBezierPath+Rob_forEach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Rob_forEach.h"; sourceTree = "<group>"; };
+		3198077319FAE31300149DB5 /* UIBezierPath+Rob_forEach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Rob_forEach.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,10 @@
 				3198074B19FAD59200149DB5 /* AppDelegate.m */,
 				3198074D19FAD59200149DB5 /* ViewController.h */,
 				3198074E19FAD59200149DB5 /* ViewController.m */,
+				3198076F19FAE25D00149DB5 /* UIBezierPath+Rob_warp.h */,
+				3198077019FAE25D00149DB5 /* UIBezierPath+Rob_warp.m */,
+				3198077219FAE31300149DB5 /* UIBezierPath+Rob_forEach.h */,
+				3198077319FAE31300149DB5 /* UIBezierPath+Rob_forEach.m */,
 				3198075019FAD59200149DB5 /* Main.storyboard */,
 				3198075319FAD59200149DB5 /* Images.xcassets */,
 				3198075519FAD59200149DB5 /* LaunchScreen.xib */,
@@ -219,7 +229,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3198077419FAE31300149DB5 /* UIBezierPath+Rob_forEach.m in Sources */,
 				3198074F19FAD59200149DB5 /* ViewController.m in Sources */,
+				3198077119FAE25D00149DB5 /* UIBezierPath+Rob_warp.m in Sources */,
 				3198074C19FAD59200149DB5 /* AppDelegate.m in Sources */,
 				3198074919FAD59200149DB5 /* main.m in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "UIBezierPath+Rob_warp.h"
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UISwitch *pathSwitch;
@@ -75,6 +76,10 @@
     NSUInteger i = self.indexOfVisiblePath;
     CAShapeLayer *layer = pathLayers[i];
     UIBezierPath *path = paths[i];
+    CGRect rect = path.bounds;
+    CGPoint fixedPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
+    CGPoint startPoint = CGPointMake(fixedPoint.x, CGRectGetMaxY(rect));
+    path = [path Rob_warpedWithFixedPoint:fixedPoint startPoint:startPoint endPoint:endAnchor];
     layer.path = path.CGPath;
 }
 
