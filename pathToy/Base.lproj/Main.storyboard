@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -17,10 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQJ-0Y-h5h" customClass="PathView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LKs-WJ-VNM">
                                 <rect key="frame" x="255" y="529" width="51" height="31"/>
                                 <connections>
@@ -29,21 +24,25 @@
                             </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.95052206574583076" green="0.95474468280122093" blue="0.96741253396739135" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="LKs-WJ-VNM" secondAttribute="bottom" constant="8" id="BfU-Px-h7q"/>
-                            <constraint firstItem="XQJ-0Y-h5h" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="G38-86-iMs"/>
-                            <constraint firstItem="XQJ-0Y-h5h" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="M9D-HF-tES"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="XQJ-0Y-h5h" secondAttribute="bottom" id="Tba-OR-0wM"/>
                             <constraint firstAttribute="trailing" secondItem="LKs-WJ-VNM" secondAttribute="trailing" constant="16" id="huQ-71-BL0"/>
-                            <constraint firstAttribute="trailing" secondItem="XQJ-0Y-h5h" secondAttribute="trailing" id="whs-9j-ds5"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="QUJ-i9-lu5" appends="YES" id="qC1-Pl-psx"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="pathSwitch" destination="LKs-WJ-VNM" id="SHk-f4-vFc"/>
-                        <outlet property="pathView" destination="XQJ-0Y-h5h" id="Xcz-KT-H6T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="QUJ-i9-lu5">
+                    <connections>
+                        <action selector="panRecognizerDidFire:" destination="vXZ-lx-hvc" id="a6L-7J-DV2"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="74.666666666666671" y="128.74666666666667"/>
         </scene>

@@ -7,10 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "PathView.h"
 
 @interface ViewController ()
-@property (strong, nonatomic) IBOutlet PathView *pathView;
 @property (strong, nonatomic) IBOutlet UISwitch *pathSwitch;
 
 @end
@@ -18,6 +16,8 @@
 @implementation ViewController {
     NSArray *paths;
     NSArray *pathLayers;
+    CAShapeLayer *endAnchorLayer;
+    CGPoint endAnchor;
 }
 
 - (void)viewDidLoad {
@@ -26,6 +26,7 @@
     for (CAShapeLayer *layer in pathLayers) {
         [self.view.layer addSublayer:layer];
     }
+    [self initializeEndAnchorLayer];
 }
 
 - (CAShapeLayer *)newFilledPathLayer {
@@ -46,11 +47,16 @@
 
 - (void)viewDidLayoutSubviews {
     [self initializePaths];
+    [self initializeEndAnchor];
     [self updatePath];
 }
 
-- (NSUInteger)indexOfVisiblePathLayer {
+- (NSUInteger)indexOfVisiblePath {
     return self.pathSwitch.isOn ? 1 : 0;
+}
+
+- (UIBezierPath *)visiblePath {
+    return paths[self.indexOfVisiblePath];
 }
 
 - (IBAction)pathSwitchValueChanged:(id)sender {
@@ -59,14 +65,14 @@
 }
 
 - (void)setPathLayerVisibilities {
-    NSUInteger visibleIndex = self.indexOfVisiblePathLayer;
+    NSUInteger visibleIndex = self.indexOfVisiblePath;
     [pathLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [obj setHidden:idx != visibleIndex];
     }];
 }
 
 - (void)updatePath {
-    NSUInteger i = self.indexOfVisiblePathLayer;
+    NSUInteger i = self.indexOfVisiblePath;
     CAShapeLayer *layer = pathLayers[i];
     UIBezierPath *path = paths[i];
     layer.path = path.CGPath;
@@ -83,11 +89,11 @@
 
 - (UIBezierPath *)path0WithSize:(CGSize)size {
     CGFloat x = size.width / 2;
-    static int kBubbleMaxIndex = 10;
+    static int kBubbleMaxIndex = 7;
     UIBezierPath *path = [UIBezierPath bezierPath];
     for (int i = 0; i <= kBubbleMaxIndex; ++i) {
         CGFloat t = (CGFloat)i / kBubbleMaxIndex;
-        CGFloat radius = 15 * (1 - t) + 2.5 * t;
+        CGFloat radius = 10 * (1 - t) + 2.5 * t;
         CGRect bubbleRect = CGRectMake(x - radius, t * size.height - radius, 2 * radius, 2 * radius);
         UIBezierPath *bubble = [UIBezierPath bezierPathWithOvalInRect:bubbleRect];
         [path appendPath:bubble];
@@ -108,6 +114,38 @@
     path.lineJoinStyle = kCGLineJoinRound;
     path.lineCapStyle = kCGLineCapRound;
     return path;
+}
+
+- (void)initializeEndAnchorLayer {
+    CGRect rect = CGRectMake(-22, -22, 44, 44);
+    endAnchorLayer = [CAShapeLayer layer];
+    endAnchorLayer.actions = @{
+        @"position": [NSNull null]
+    };
+    endAnchorLayer.opacity = 0.2;
+    endAnchorLayer.path = [UIBezierPath bezierPathWithOvalInRect:rect].CGPath;
+    endAnchorLayer.strokeColor = [UIColor colorWithRed:93.0f/255.0f green:165.0f/255.0f blue:171.0f/255.0f alpha:1.0].CGColor;
+    endAnchorLayer.lineWidth = 1.5;
+    endAnchorLayer.lineJoin = kCALineJoinRound;
+    endAnchorLayer.fillColor = [UIColor colorWithRed:218.0f/255.0f green:245.0f/255.0f blue:245.0f/255.0f alpha:1.0].CGColor;
+    [self.view.layer addSublayer:endAnchorLayer];
+}
+
+- (void)initializeEndAnchor {
+    CGRect rect = [self.visiblePath bounds];
+    [self setEndAnchor:CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect))];
+}
+
+- (void)setEndAnchor:(CGPoint)point {
+    endAnchor = point;
+    endAnchorLayer.position = endAnchor;
+    [self updatePath];
+}
+
+- (IBAction)panRecognizerDidFire:(UIPanGestureRecognizer *)sender {
+    CGPoint offset = [sender translationInView:self.view];
+    [sender setTranslation:CGPointZero inView:self.view];
+    [self setEndAnchor:CGPointMake(endAnchor.x + offset.x, endAnchor.y + offset.y)];
 }
 
 @end
